@@ -1,0 +1,76 @@
+.app-header{
+  width: 100vw;
+  height: 800px;
+  background-image: image-url('top_img.jpg');
+  background-size: cover;
+  &__topbox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__title{
+      color: white;
+      font-size: 40px;
+      margin: 20px 20px;
+      text-shadow: 1px 2px 3px #100010;
+    }
+    &__logbox{
+      margin-right: 20px;
+      &__1{
+        color: white;
+        text-decoration: none;
+      }
+      &__2{
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+  &__lowerbox{
+    width: 70%;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid;
+    border-color: rgb(73, 77, 73);
+    border-radius: 8px;
+    box-shadow: 0 32px 30px -30px rgba(102, 98, 98, 0.15);
+    display: flex;
+    margin-top: 500px;
+    &__content{
+      width: 30%;
+      margin: 20px 0;
+    }
+    &__input{
+      width: 70%;
+      margin: 20px 0;
+      &__word{
+        width: 90%;
+      }
+    }
+  }
+}
+
+.app-main{
+  margin-top: 100px;
+  &__content{
+    &__title{
+      font-size: 50px;
+    }
+    &__area{
+      display: flex;
+      justify-content: center;
+      &__box{
+
+      }
+    }
+    &__review{
+      font-size: 50px;
+      &__box{
+
+      }
+    }
+  }
+
+  &__right-bar{
+
+  }
+}

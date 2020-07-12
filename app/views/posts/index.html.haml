@@ -1,0 +1,54 @@
+.app-header
+
+  .app-header__topbox
+    .app-header__topbox__title
+      %h1 OTORIYOSE
+    .app-header__topbox__logbox
+      - if user_signed_in?
+        = link_to "マイページ", user_path(current_user.id),class: "app-header__topbox__logbox1"
+        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "app-header__topbox__logbox2"
+      - else
+        = link_to 'ログイン', new_user_session_path, class: "app-header__topbox__logbox__1"
+        = link_to '新規登録', new_user_registration_path, class: "app-header__topbox__logbox__2"
+      
+  .app-header__lowerbox
+    .app-header__lowerbox__content
+      %h1 キーワードでお取り寄せ
+    .app-header__lowerbox__input
+      = form_with url: "/posts" do |f| 
+        = f.text_field :name, placeholder: "キーワードから探す", class: "app-header__lowerbox__input__word"
+        = f.submit "検索"
+
+
+.app-main
+  .app-main__content
+    .app-main__content__title
+      %h1 エリアから探す
+    .app-main__content__area
+
+      .app-main__content__area__box
+
+    .app-main__content__review
+      %h1 レビューから探す
+      .app-main__content__review__box
+
+    .form
+      = link_to '新規投稿', new_post_path
+    .review
+      - @posts.each do |post|
+        - post.post_images.each do |i|
+          = image_tag i.image.url
+        = post.title
+        = post.review
+        = post.price
+
+  .app-main__right-bar
+
+.app-footer
+  
+
+
+
+
+
+
