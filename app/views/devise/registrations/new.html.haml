@@ -1,25 +1,37 @@
-%h2 新規登録
-= form_with model:@user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :nickname
-    %br/
-    = f.text_field :nickname, autofocus: true, autocomplete: "nickname"
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.registrations-header
+  .registrations-header__content
+    .registrations-header__content__title
+      = link_to 'OTORIYOSE', root_path
+.registrations-main
+  .registrations-container
+    .registrations__title
+      %h2 新規登録
+    .registrations-container__inputbox
+      = form_with model:@user, url: user_registration_path, id: 'new-user', class: 'new-user', local: true do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .registrations-container__inputbox__form
+          = f.label :nickname, class: 'registrations-container__inputbox__form__label'
+          %br/
+          = f.text_field :nickname, autofocus: true, autocomplete: "nickname", class: 'registrations-container__inputbox__form__field'
+        .registrations-container__inputbox__form
+          = f.label :email, class: 'registrations-container__inputbox__form__label'
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'registrations-container__inputbox__form__field'
+        .registrations-container__inputbox__form
+          = f.label :password, class: 'registrations-container__inputbox__form__label'
+          - if @minimum_password_length
+            %em
+              (#{@minimum_password_length} 文字以上)
+          %br/
+          = f.password_field :password, autocomplete: "new-password", class: 'registrations-container__inputbox__form__field'
+        .registrations-container__inputbox__form
+          = f.label :password_confirmation, "password（確認用）", class: 'registrations-container__inputbox__form__label'
+          %br/
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: 'registrations-container__inputbox__form__field'
+        .registrations-container__inputbox__submit
+          = f.submit "登録", class: 'registrations-container__inputbox__submit__btn'
+
+.registrations-footer
+  .registrations-footer__content
+    = link_to 'TOP', root_path
+    = link_to 'ログイン', new_user_session_path
