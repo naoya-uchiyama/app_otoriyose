@@ -5,8 +5,8 @@
       %h1 OTORIYOSE
     .app-header__topbox__logbox
       - if user_signed_in?
-        = link_to "マイページ", user_path(current_user.id),class: "app-header__topbox__logbox1"
-        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "app-header__topbox__logbox2"
+        = link_to "マイページ", user_path(current_user.id),class: "app-header__topbox__logbox__1"
+        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "app-header__topbox__logbox__2"
       - else
         = link_to 'ログイン', new_user_session_path, class: "app-header__topbox__logbox__1"
         = link_to '新規登録', new_user_registration_path, class: "app-header__topbox__logbox__2"

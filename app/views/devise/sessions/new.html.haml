@@ -1,17 +1,30 @@
-%h2 Log in
-= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true, autocomplete: "email"
-  .field
-    = f.label :password
-    %br/
-    = f.password_field :password, autocomplete: "current-password"
-  - if devise_mapping.rememberable?
-    .field
-      = f.check_box :remember_me
-      = f.label :remember_me
-  .actions
-    = f.submit "Log in"
-= render "devise/shared/links"
+.sessions-header
+  .sessions-header__content
+    .sessions-header__content__title
+      = link_to 'OTORIYOSE', root_path
+.sessions-main
+  .sessions-container
+    .sessions__title
+      %h2 ログイン
+    .sessions-container__inputbox
+      = form_with model:@user, url: user_session_path, local: true do |f|
+        .sessions-container__inputbox__form
+          = f.label :email, class: 'sessions-container__inputbox__form__label'
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'sessions-container__inputbox__form__field'
+        .sessions-container__inputbox__form
+          = f.label :password, class: 'sessions-container__inputbox__form__label'
+          %br/
+          = f.password_field :password, autocomplete: "current-password", class: 'sessions-container__inputbox__form__field'
+
+        .sessions-container__inputbox__submit
+          = f.submit "ログイン", class: 'sessions-container__inputbox__submit__btn'
+      .sessions-container__login
+        .sessions-container__login__no-account
+          %p.sessions-container__login__no-account__text アカウントをお持ちでない方はこちら
+          .sessions-container__login__no-account__navi
+            = link_to "新規登録", new_user_registration_path 
+
+.sessions-footer
+  .sessions-footer__content
+    = link_to 'TOP', root_path
