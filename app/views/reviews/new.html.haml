@@ -1,6 +1,9 @@
-= form_with model: @post, local: true, id: 'new_form' do |f|
+.item
+  
+
+= form_with model: @review, local: true, id: 'new_form' do |f|
   .new_form_image
-    = f.fields_for :post_images do |i|
+    = f.fields_for :review_images do |i|
       = i.file_field :image
   .new_form_name
     商品名
@@ -9,14 +12,10 @@
   .new_form_review
     レビュー
     %br
-    = f.text_area :review
+    = f.text_area :content
   .new_form_price
     値段
     %br
     = f.number_field :price
-  .new_form_prefecture
-    生産地
-    %br
-    = f.select :prefecture, Post.prefectures.keys, {include_blank: '選択してください'}
   .new_form_submit
     = f.submit '登録する'

@@ -1,0 +1,36 @@
+.search-box
+  = form_with url: items_search_path, method: :get, local: true do |f|
+    .form-group
+      = f.text_field :keyword, placeholder: "キーワードから探す", class: "form-control"
+      = f.submit '検索', class: "form-control btn btn-success"
+
+.search-view
+  - if @items.present? 
+    - @items.each do |item|
+      .item-box
+        .item-image
+          - item['mediumImageUrls'].size.times do |i|
+            = link_to (image_tag(item['mediumImageUrls'][i])), item['itemUrl'], target: :_blank
+        .item-name
+          %h2 商品名
+          = link_to item['itemName'], item['itemUrl'], target: :_blank
+        
+        .item-price
+          %h2 値段
+          = "￥#{item['itemPrice']}円"
+          %br
+          %br
+        - if user_signed_in?
+          = form_with url: items_path, method: :post, local:true do |f|
+            = f.hidden_field :name, value: item['itemName']
+            = f.hidden_field :discription, value: item['itemCaption']
+            = f.hidden_field :price, value: item['itemPrice']
+            = f.hidden_field :imageurl, value: item['mediumImageUrls'][0]
+            = f.hidden_field :itemurl, value: item['itemUrl']
+            = f.submit 'お気に入り登録'
+        - else
+          %h2 こんにちは
+
+  - else
+    %p 値が入っていません
+    
