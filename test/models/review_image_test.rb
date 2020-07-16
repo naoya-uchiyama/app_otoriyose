@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class PostImageTest < ActiveSupport::TestCase
+class ReviewImageTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,0 +1,15 @@
+.item-show
+  .item-show__box
+    .item-show__box__title
+      = @item.name
+    .item-show__box__image
+      = image_tag @item.imageurl
+    .item-show__box__discription
+      = @item.discription
+    .item-show__box__price
+      = @item.price
+
+  .item-show__link
+    = link_to "商品購入ページ", @item.itemurl
+    = link_to "レビューを書く", new_item_post_path(@item.id)
+    = link_to "TOP", root_path
