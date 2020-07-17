@@ -11,5 +11,5 @@
 
   .item-show__link
     = link_to "商品購入ページ", @item.itemurl
-    = link_to "レビューを書く", new_item_post_path(@item.id)
+    = link_to "レビューを書く", new_item_review_path(@item.id)
     = link_to "TOP", root_path

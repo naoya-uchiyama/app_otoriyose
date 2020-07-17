@@ -1,21 +1,19 @@
 .item
-  
+  = image_tag @item.imageurl
+  = @item.name
+  = @item.price
 
-= form_with model: @review, local: true, id: 'new_form' do |f|
-  .new_form_image
-    = f.fields_for :review_images do |i|
-      = i.file_field :image
+= form_with model: [@item,@review], local: true, id: 'new_form' do |f|
   .new_form_name
-    商品名
+    タイトル
     %br
     = f.text_field :title
   .new_form_review
     レビュー
     %br
     = f.text_area :content
-  .new_form_price
-    値段
-    %br
-    = f.number_field :price
+  .new_form_image
+    = f.fields_for :review_images do |i|
+      = i.file_field :image
   .new_form_submit
     = f.submit '登録する'
