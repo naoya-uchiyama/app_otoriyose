@@ -38,6 +38,9 @@
     &__content{
       width: 30%;
       margin: 20px 0;
+      h1{
+        text-align: center
+      }
     }
     &__input{
       width: 70%;
@@ -50,27 +53,69 @@
 }
 
 .app-main{
-  margin-top: 100px;
+  margin-top: 50px;
   &__content{
     &__title{
       font-size: 50px;
+      margin-left: 50px;
+      margin-top: 50px;
+      position: relative;
+    }
+    &__title::after{
+      content: "";
+      width: 500px;
+      height: 4px;
+      background-color: #3CCACE;
+      position: absolute;
+      bottom: 0;
+      left: 16%;
+      transform: translateX(-50%);
     }
     &__area{
       display: flex;
       justify-content: center;
+      padding-bottom: 30px;
+      border-bottom: 1px solid;
+      border-color: #494d49;
       &__box{
-
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px 30px;
+        border: 1px solid;
+        border-color: #494d49;
+        &__submit{
+          background-color: white;
+          border-color: white;
+          font-size: 17px;
+          height: 40px;
+          cursor: pointer;
+        }
       }
     }
     &__review{
-      font-size: 50px;
       &__box{
-
+        table{
+          margin: 60px;
+          width: 90%;
+          td{
+            border: 1px solid;
+            border-color: #494d49;
+          }
+        }
       }
     }
   }
+}
 
-  &__right-bar{
-
+.app-footer{
+  padding: 90px 0;
+  color: #fff;
+  background-color: #272727;
+  text-align: center;
+  a{
+    font-size: 30px;
+    color: #fff;
+    text-decoration: none;
   }
 }

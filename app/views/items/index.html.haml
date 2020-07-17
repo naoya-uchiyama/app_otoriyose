@@ -25,26 +25,77 @@
     .app-main__content__title
       %h1 エリアから探す
     .app-main__content__area
-
       .app-main__content__area__box
+        = image_tag 'top_img_tokyo.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "東京 お取り寄せ"
+          = f.submit '東京のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_osaka.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "大阪 お取り寄せ"
+          = f.submit '大阪のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_hokkaido.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "北海道 お取り寄せ"
+          = f.submit '北海道のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_okinawa.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "沖縄 お取り寄せ"
+          = f.submit '沖縄のお取り寄せで検索', class: "app-main__content__area__box__submit"
 
-    .app-main__content__review
+    .app-main__content__title
+      %h1 食材から探す
+    .app-main__content__area
+      .app-main__content__area__box
+        = image_tag 'top_img_meet.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "肉 お取り寄せ"
+          = f.submit '肉のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_susi.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "寿司 お取り寄せ"
+          = f.submit '寿司のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_kaisen.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "海鮮 お取り寄せ"
+          = f.submit '海鮮のお取り寄せで検索', class: "app-main__content__area__box__submit"
+      .app-main__content__area__box
+        = image_tag 'top_img_cake.jpg', width: '100px', height: '100px'
+        = form_with url: items_search_path, method: :get, local: true do |f|
+          = f.hidden_field :keyword, value: "スイーツ お取り寄せ"
+          = f.submit 'スイーツのお取り寄せで検索', class: "app-main__content__area__box__submit"
+
+
+    .app-main__content__title
       %h1 レビューから探す
+    .app-main__content__review
       .app-main__content__review__box
+        - @items.each do |item|
+          
+          %table
+            %td
+              = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
+            %td
+              = item.name
+              %br
+              %br
+              = link_to "商品詳細ページ", item_path(item.id)
+            %td
+              = "¥#{item.price}円"
+         
 
-    .form
-    .review
-      - @items.each do |item|
-        = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
-        = item.name
-        = item.price
-        = link_to "商品詳細ページ", item_path(item.id)
 
 
-
-  .app-main__right-bar
 
 .app-footer
+  %p 気軽に美味しいをお取り寄せ
+  %br
+  = link_to "OTORIYOSE", root_path
 
 
 
