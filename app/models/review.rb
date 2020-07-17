@@ -8,7 +8,7 @@ class Review < ApplicationRecord
   accepts_nested_attributes_for :review_images, allow_destroy: true
   has_many :comments, dependent: :destroy
 
-  validates_associated :post_images
+  validates_associated :review_images
 
   validates :title, :content, presence: true
 end
