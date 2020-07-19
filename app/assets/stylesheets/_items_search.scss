@@ -1,0 +1,26 @@
+.search-view{
+  .item-box{
+    table{
+      margin: 60px;
+      width: 90%;
+      td{
+        border: 1px solid #494d49;
+      }
+      .item-box__item-name{
+        padding: 20px;
+        .td-submit{
+          background-color: white;
+          border-color: white;
+          font-size: 17px;
+          height: 40px;
+
+          cursor: pointer;
+        }
+      }
+      .item-box__item-price{
+        width: 100px;
+        text-align: center;;
+      }
+    }
+  }
+}

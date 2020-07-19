@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   def index
-    @items = Item.includes(:user)
+    @items = Item.includes(:user).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def create
@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
 
   def search
-    if params[:keyword]
+    if params[:keyword].present?
       @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword], genreId: 100227 )
     end
   end
