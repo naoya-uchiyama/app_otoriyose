@@ -8,29 +8,25 @@
   - if @items.present? 
     - @items.each do |item|
       .item-box
-        .item-image
-          - item['mediumImageUrls'].size.times do |i|
-            = link_to (image_tag(item['mediumImageUrls'][i])), item['itemUrl'], target: :_blank
-        .item-name
-          %h2 商品名
-          = link_to item['itemName'], item['itemUrl'], target: :_blank
-        
-        .item-price
-          %h2 値段
-          = "￥#{item['itemPrice']}円"
-          %br
-          %br
-        - if user_signed_in?
-          = form_with url: items_path, method: :post, local:true do |f|
-            = f.hidden_field :name, value: item['itemName']
-            = f.hidden_field :discription, value: item['itemCaption']
-            = f.hidden_field :price, value: item['itemPrice']
-            = f.hidden_field :imageurl, value: item['mediumImageUrls'][0]
-            = f.hidden_field :itemurl, value: item['itemUrl']
-            = f.submit 'お気に入り登録'
-        - else
-          %h2 こんにちは
-
+        %table
+          %td.item-box__item-image
+            = link_to (image_tag(item['mediumImageUrls'][0])), item['itemUrl'], target: :_blank
+          %td.item-box__item-name
+            %h2 商品名
+            = link_to item['itemName'], item['itemUrl'], target: :_blank
+            %br
+            %br
+            - if user_signed_in?
+              = form_with url: items_path, method: :post, local:true do |f|
+                = f.hidden_field :name, value: item['itemName']
+                = f.hidden_field :discription, value: item['itemCaption']
+                = f.hidden_field :price, value: item['itemPrice']
+                = f.hidden_field :imageurl, value: item['mediumImageUrls'][0]
+                = f.hidden_field :itemurl, value: item['itemUrl']
+                = f.submit 'お気に入り登録', class: 'td-submit'
+          %td.item-box__item-price
+            %h2 値段
+            = "￥#{item['itemPrice']}円"
   - else
-    %p 値が入っていません
-    
+    %p キーワードが入力されていません
+  

@@ -1,25 +1,4 @@
-.app-header
-
-  .app-header__topbox
-    .app-header__topbox__title
-      %h1 OTORIYOSE
-    .app-header__topbox__logbox
-      - if user_signed_in?
-        = link_to "マイページ", user_path(current_user.id),class: "app-header__topbox__logbox__1"
-        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "app-header__topbox__logbox__2"
-      - else
-        = link_to 'ログイン', new_user_session_path, class: "app-header__topbox__logbox__1"
-        = link_to '新規登録', new_user_registration_path, class: "app-header__topbox__logbox__2"
-      
-  .app-header__lowerbox
-    .app-header__lowerbox__content
-      %h1 キーワードでお取り寄せ
-    .app-header__lowerbox__input
-      = form_with url: items_search_path, method: :get, local: true do |f| 
-        = f.text_field :keyword, placeholder: "キーワードから探す", class: "app-header__lowerbox__input__word"
-        = f.submit "検索"
-
-
+= render 'header'
 .app-main
   .app-main__content
     .app-main__content__title
@@ -80,22 +59,21 @@
           %table
             %td
               = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
-            %td
+            %td.td-item-name
+              %p 商品名
               = item.name
               %br
               %br
               = link_to "商品詳細ページ", item_path(item.id)
-            %td
+            %td.td-item-price
               = "¥#{item.price}円"
-         
+
+      = paginate(@items)
 
 
 
 
-.app-footer
-  %p 気軽に美味しいをお取り寄せ
-  %br
-  = link_to "OTORIYOSE", root_path
+
 
 
 
