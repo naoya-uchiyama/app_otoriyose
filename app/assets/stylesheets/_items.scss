@@ -1,3 +1,52 @@
+// ここからheader
+
+.header{
+  background-color: #494d49;
+  padding: 50px;
+  &__topbox{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    &__title{
+      font-size: 30px;
+      text-shadow: 1px 2px 3px #100010;
+      a{
+        color: white;
+        text-decoration: none; 
+      }
+    }
+    &__input{
+      &__word{
+        width: 500px;
+        margin: 20px 0;
+      }
+    }
+  }
+  &__lowerbox{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+    &__link{
+      a{
+        color: white;
+        text-decoration: none;
+        margin-left: 30px;
+      }
+    }
+    &__logbox{
+      &__1{
+        color: white;
+        text-decoration: none;
+      }
+      &__2{
+        color: white;
+        text-decoration: none;
+        margin-right: 30px;
+      }
+    }
+  }
+}
+
 // ここからindex
 
 .app-header{
@@ -140,7 +189,11 @@
       td{
         border: 1px solid #494d49;
       }
+      .item-box__item-image{
+        width: 130px;
+      }
       .item-box__item-name{
+        
         padding: 20px;
         .td-submit{
           background-color: white;
