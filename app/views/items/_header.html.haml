@@ -1,19 +1,22 @@
-.app-header
-  .app-header__topbox
-    .app-header__topbox__title
-      %h1 OTORIYOSE
-    .app-header__topbox__logbox
-      - if user_signed_in?
-        = link_to "マイページ", user_path(current_user.id),class: "app-header__topbox__logbox__1"
-        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "app-header__topbox__logbox__2"
-      - else
-        = link_to 'ログイン', new_user_session_path, class: "app-header__topbox__logbox__1"
-        = link_to '新規登録', new_user_registration_path, class: "app-header__topbox__logbox__2"
-      
-  .app-header__lowerbox
-    .app-header__lowerbox__content
-      %h1 キーワードでお取り寄せ
-    .app-header__lowerbox__input
+.header
+  .header__topbox
+    .header__topbox__title
+      =link_to "OTORIYOSE", root_path
+    .header__topbox__input
       = form_with url: items_search_path, method: :get, local: true do |f| 
-        = f.text_field :keyword, placeholder: "キーワードから探す", class: "app-header__lowerbox__input__word"
+        = f.text_field :keyword, placeholder: "キーワードから探す", class: "header__topbox__input__word"
         = f.submit "検索"
+  .header__lowerbox
+    .header__lowerbox__link
+      - if user_signed_in?
+        = link_to "お気に入り一覧", "/users/#{current_user.id}"
+    .header__lowerbox__logbox
+      - if user_signed_in?
+        = link_to "マイページ", user_path(current_user.id),class: "header__lowerbox__logbox__1"
+        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__lowerbox__logbox__2"
+      - else
+        = link_to 'ログイン', new_user_session_path, class: "header__lowerbox__logbox__1"
+        = link_to '新規登録', new_user_registration_path, class: "header__lowerbox__logbox__2"
+      
+ 
+    
