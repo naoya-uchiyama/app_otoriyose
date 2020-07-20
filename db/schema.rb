@@ -43,17 +43,10 @@ ActiveRecord::Schema.define(version: 2020_07_12_061130) do
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "review_images", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.text "image", null: false
-    t.bigint "review_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["review_id"], name: "index_review_images_on_review_id"
-  end
-
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
+    t.text "image"
     t.bigint "user_id"
     t.bigint "item_id"
     t.datetime "created_at", null: false
@@ -80,7 +73,6 @@ ActiveRecord::Schema.define(version: 2020_07_12_061130) do
   add_foreign_key "favorites", "reviews"
   add_foreign_key "favorites", "users"
   add_foreign_key "items", "users"
-  add_foreign_key "review_images", "reviews"
   add_foreign_key "reviews", "items"
   add_foreign_key "reviews", "users"
 end

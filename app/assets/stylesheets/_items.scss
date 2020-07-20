@@ -1,0 +1,274 @@
+// ここからindex
+
+.app-header{
+  width: 100vw;
+  height: 800px;
+  background-image: image-url('top_img4.jpg');
+  background-size: cover;
+  &__topbox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &__title{
+      color: white;
+      font-size: 40px;
+      margin: 20px 20px;
+      text-shadow: 1px 2px 3px #100010;
+    }
+    &__logbox{
+      margin-right: 20px;
+      &__1{
+        color: white;
+        text-decoration: none;
+      }
+      &__2{
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+  &__lowerbox{
+    width: 70%;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid;
+    border-color: rgb(73, 77, 73);
+    border-radius: 8px;
+    box-shadow: 0 32px 30px -30px rgba(102, 98, 98, 0.15);
+    display: flex;
+    margin-top: 500px;
+    &__content{
+      width: 30%;
+      margin: 20px 0;
+      h1{
+        text-align: center
+      }
+    }
+    &__input{
+      width: 70%;
+      margin: 20px 0;
+      &__word{
+        width: 90%;
+      }
+    }
+  }
+}
+
+.app-main{
+  margin-top: 50px;
+  &__content{
+    &__title{
+      font-size: 50px;
+      margin-left: 50px;
+      margin-top: 50px;
+      position: relative;
+    }
+    &__title::after{
+      content: "";
+      width: 500px;
+      height: 4px;
+      background-color: #3CCACE;
+      position: absolute;
+      bottom: 0;
+      left: 16%;
+      transform: translateX(-50%);
+    }
+    &__area{
+      display: flex;
+      justify-content: center;
+      padding-bottom: 30px;
+      border-bottom: 1px solid;
+      border-color: #494d49;
+      &__box{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 50px 30px;
+        border: 1px solid;
+        border-color: #494d49;
+        &__submit{
+          background-color: white;
+          border-color: white;
+          font-size: 17px;
+          height: 40px;
+          cursor: pointer;
+        }
+      }
+    }
+    &__review{
+      &__box{
+        table{
+          margin: 60px;
+          width: 90%;
+          td{
+            border: 1px solid;
+            border-color: #494d49;
+          }
+          .td-item-name{
+            padding: 20px;
+          }
+          .td-item-price{
+            width: 100px;
+            text-align: center;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.app-footer{
+  padding: 90px 0;
+  color: #fff;
+  background-color: #272727;
+  text-align: center;
+  a{
+    font-size: 30px;
+    color: #fff;
+    text-decoration: none;
+  }
+}
+
+// ここからsearch
+
+.search-view{
+  .item-box{
+    table{
+      margin: 60px;
+      width: 90%;
+      td{
+        border: 1px solid #494d49;
+      }
+      .item-box__item-name{
+        padding: 20px;
+        .td-submit{
+          background-color: white;
+          border-color: white;
+          font-size: 17px;
+          height: 40px;
+
+          cursor: pointer;
+        }
+      }
+      .item-box__item-price{
+        width: 100px;
+        text-align: center;;
+      }
+    }
+  }
+}
+
+// ここからshow
+
+.item-new-main{
+  background-color: #f8f8f8;
+  padding: 60px 90px;
+  &__container{
+    width: 80%;
+    background-color: white;
+    margin: 0 auto;
+    .item-new-main__item-box{
+      margin-bottom: 40px;
+      font-size: 18px;
+      td{
+        
+        border: 1px solid #494d49;
+        text-align: center;
+      }
+      &__image{
+      }
+      &__name{
+
+      }
+      &__price{
+        width: 100px;
+        
+      }
+      &__discription{
+        td{
+          font-size: 18px;
+          text-align: center;
+          border: 1px solid #494d49;
+          text-align: center;
+        }
+      }
+    }
+
+    .review-form{
+      background-color: white;
+      padding-top: 50px;
+      text-align: center;
+      .new-form{
+        font-size: 25px;
+        label{
+          display: block;
+          margin-bottom: 20px;
+          font-size: 30px;
+        }
+        #review_title{
+          height: 80px;
+          width: 90%;
+          margin-bottom: 30px;
+        }
+        #review_content{
+          height: 200px;
+          width: 90%;
+        }
+        #review_image{
+          margin-bottom: 50px;
+        }
+        &__submit{
+          &__btn{
+            width: 60%;
+            font-size: 18px;
+            line-height: 48px;
+            padding: 1px 7px 2px;
+            background: #3CCACE;
+            border: 1px solid #3CCACE;
+            color: #fff;
+            border-radius: 100px;
+            font-weight: 500;
+            margin-bottom: 50px;
+          }
+        }
+      }
+    }
+    .review-container{
+      padding: 60px;
+      font-size: 30px;
+      
+      &__box{
+        text-align: center;
+        &__title{
+          
+          color: #3CCACE;
+        }
+        &__content{
+          &__title{
+            padding: 30px
+          }
+          &__box{
+            display: flex;
+            justify-content: center;
+            padding-bottom: 30px;
+            font-size: 20px;
+            .reviewer{
+              padding-right: 5px;
+            }
+            .create-at{
+
+            }
+          }
+          &__content{
+            padding-bottom: 30px;
+            font-size: 25px;
+          }
+          &__image{
+            padding-bottom: 30px
+          }
+        }
+      }
+    }
+  }
+}

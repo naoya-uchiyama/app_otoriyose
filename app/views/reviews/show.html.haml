@@ -1,0 +1,30 @@
+.review-main
+  .review-main__container
+    %table.review-main__item-box
+      %td
+      %td
+        %p 商品名
+      %td
+        %p 価格
+      %tr
+      %td.review-main__item-box__image
+        = image_tag @review.item.imageurl, class: "review-main__item-box__image__content"
+      %td.review-main__item-box__name
+        = @review.item.name
+      %td.review-main__item-box__price
+        = "¥#{@review.item.price}円" 
+    %table.review-main__item-box__discription
+      %td 商品説明
+      %tr
+      %td
+        = @review.item.discription
+        = link_to "商品詳細ページ", "/items/#{@review.item.id}"
+
+.review
+  - @reviews.each do |review|
+  .review-title
+    = review.title
+  .review-content
+    = review.content
+  .review-image
+    = review.image
