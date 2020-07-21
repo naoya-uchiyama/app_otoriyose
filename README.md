@@ -1,12 +1,12 @@
 # アプリ名
   OTORIYOSE
 
-  ![Uploading 51fe65ac5f76830f9b32a9b1778d7d2c.png…]()
+  ![sample1.jpg](https://github.com/naoya-uchiyama/app_otoriyose/blob/master/sample1.jpg)
 
 ## 概要
   お取り寄せ商品を楽天市場より検索し、気になったものは保存しておくことができる。また保存した商品のレビューを他ユーザーと共有することで、様々な商品を見つけることができる。
 
-  ![Uploading 51fe65ac5f76830f9b32a9b1778d7d2c.png…]()
+  ![sample2](https://github.com/naoya-uchiyama/app_otoriyose/blob/master/sample2.png)
 
 ## 制作背景
   昨今のコロナウイルスの影響で、多くの方が外出することを控え巣篭もり消費が増えています。家にいながら観光地や有名店の商品を購入でき、出掛けた気分になれるお取り寄せ商品のニーズが強くなっていると考え作成しました。
