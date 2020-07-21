@@ -1,24 +1,23 @@
+# アプリ名
+  OTORIYOSE
+
+  ![Uploading 51fe65ac5f76830f9b32a9b1778d7d2c.png…]()
+
+## 概要
+  お取り寄せ商品を楽天市場より検索し、気になったものは保存しておくことができる。また保存した商品のレビューを他ユーザーと共有することで、様々な商品を見つけることができる。
+
+  ![Uploading 51fe65ac5f76830f9b32a9b1778d7d2c.png…]()
+
+## 制作背景
+  昨今のコロナウイルスの影響で、多くの方が外出することを控え巣篭もり消費が増えています。家にいながら観光地や有名店の商品を購入でき、出掛けた気分になれるお取り寄せ商品のニーズが強くなっていると考え作成しました。
+  また、私自身お取り寄せ商品を頼んでみて失敗してしまったことがあり、どの商品が本当に美味しいのかユーザーの生のレビューを聞きたいという思いもあり今回このアプリを作成しています。
+
+## 使い方
+  ログイン後、検索フォームからお取り寄せしたいキーワードを検索していただくとキーワードにヒットした楽天ストアの商品が表示されます。お気に入り登録をするとレビューを書くことができるようになります。
+  また、トップページでは他ユーザーがお気に入りにした商品、レビューを見ることができます。
+
+
 # DB設計
-
-
-## Postsテーブル
-
-|Column|Type|Options|
-|------|----|-------|
-|title|string|null: false|
-|review|text|null: false|
-|price|integer|null: false|
-|prefecture|integer|null: false|
-|user|references|foreign_key:true|
-
-### Association
-- has_many :favorites, dependent: :destroy
-- has_many :users, through: :favorites
-- has_many :post_images, dependent: :destroy
-- has_many :comments, dependent: :destroy
-
-- belongs_to :user
-
 
 ## Usersテーブル
 
@@ -29,9 +28,40 @@
 |password|string|null: false|
 
 ### Association
-- has_many :posts, dependent: :destroy
+- has_many :reviews, dependent: :destroy
 - has_many :favorites, dependent: :destroy
-- has_many :comments, dependent: :destroy
+
+
+## Itemsテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|name|string|null: false|
+|discription|text|null: false|
+|price|integer|null: false|
+|imageurl|text|null: false|
+|itemurl|text|null: false|
+|user|references|foreign_key:true|
+
+### Association
+- has_many :favorites, dependent: :destroy
+- has_many :users, through: :favorites
+- has_many :reviews, dependent: :destroy
+
+- belongs_to :user
+
+
+## reviewsテーブル
+|Column|Type|Options|
+|------|----|-------|
+|title|string|null: false|
+|content|text|null: false|
+|user_id|integer|null: false, foreign_key: true|
+|item_id|integer|null: false, foreign_key: true|
+
+### Association
+- belongs_to :item
+- belongs_to :user
 
 
 ## Favoritesテーブル
@@ -43,27 +73,4 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :post
-
-
-## Post_imagesテーブル
-
-|Column|Type|Options|
-|------|----|-------|
-|image|text|null: false|
-|post_id|integer|null: false, foreign_key: true|
-
-### Association
-- belongs_to :post
-
-
-## commentsテーブル
-|Column|Type|Options|
-|------|----|-------|
-|comment|text|null: false|
-|user_id|integer|null: false, foreign_key: true|
-|post_id|integer|null: false, foreign_key: true|
-
-### Association
-- belongs_to :post
-- belongs_to :user
+- belongs_to :item
