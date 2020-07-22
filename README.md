@@ -58,8 +58,9 @@
 |------|----|-------|
 |title|string|null: false|
 |content|text|null: false|
-|user_id|integer|null: false, foreign_key: true|
-|item_id|integer|null: false, foreign_key: true|
+|image|text|null: false|
+|user|references|foreign_key: true|
+|item|references|foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -73,8 +74,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|review_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|review|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
