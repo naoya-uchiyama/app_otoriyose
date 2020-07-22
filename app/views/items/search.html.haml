@@ -8,7 +8,6 @@
           %td.item-box__item-image
             = link_to (image_tag(item['mediumImageUrls'][0])), item['itemUrl'], target: :_blank
           %td.item-box__item-name
-            %h2 商品名
             = link_to item['itemName'], item['itemUrl'], target: :_blank
             %br
             %br
@@ -21,7 +20,6 @@
                 = f.hidden_field :itemurl, value: item['itemUrl']
                 = f.submit 'お気に入り登録', class: 'td-submit'
           %td.item-box__item-price
-            %h2 値段
             = "￥#{item['itemPrice']}円"
   - else
     %p キーワードが入力されていません
