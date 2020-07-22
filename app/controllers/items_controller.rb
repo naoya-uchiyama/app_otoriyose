@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   def index
     @items = Item.includes(:user).order("created_at DESC").page(params[:page]).per(5)
+    @reviews = Review.includes(:user).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def create
@@ -22,6 +23,12 @@ class ItemsController < ApplicationController
     if params[:keyword].present?
       @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword], genreId: 100227 )
     end
+  end
+
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy
+    redirect_to root_path
   end
 
   private
