@@ -29,8 +29,11 @@
 |password|string|null: false|
 
 ### Association
+
+- has_many :items, dependent: :destroy
 - has_many :reviews, dependent: :destroy
 - has_many :favorites, dependent: :destroy
+- has_many :fav_reviews, through: :favorites, source: :review
 
 
 ## Itemsテーブル
@@ -45,11 +48,9 @@
 |user|references|foreign_key:true|
 
 ### Association
-- has_many :favorites, dependent: :destroy
-- has_many :users, through: :favorites
-- has_many :reviews, dependent: :destroy
-
 - belongs_to :user
+
+- has_many :reviews, dependent: :destroy
 
 
 ## reviewsテーブル
@@ -61,17 +62,20 @@
 |item_id|integer|null: false, foreign_key: true|
 
 ### Association
-- belongs_to :item
 - belongs_to :user
+- belongs_to :item
+
+- has_many :favorites, dependent: :destroy
+- has_many :users, through: :favorites
 
 
 ## Favoritesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|item_id|integer|null: false, foreign_key: true|
 |user_id|integer|null: false, foreign_key: true|
+|review_id|integer|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
-- belongs_to :item
+- belongs_to :review
