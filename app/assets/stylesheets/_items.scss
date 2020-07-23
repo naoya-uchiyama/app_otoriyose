@@ -26,6 +26,10 @@
     display: flex;
     justify-content: space-between;
     margin: 15px;
+    &__nickname{
+      color: white;
+      margin-left: 30px;
+    }
     &__link{
       a{
         color: white;
@@ -111,6 +115,9 @@
       margin-left: 50px;
       margin-top: 50px;
       position: relative;
+      h1{
+        margin: 0 0 60px 0;
+      }
     }
     &__title::after{
       content: "";
@@ -147,6 +154,10 @@
     }
     &__review{
       &__box{
+        &__log{
+          font-size: 20px;
+          margin: 40px;
+        }
         table{
           margin: 60px;
           width: 90%;
@@ -158,6 +169,7 @@
             text-align: center;
             padding: 20px;
             a{
+              margin-right: 30px;
               font-size: 20px;
               display: inline-block;
               padding: 0.5em 1em;
@@ -171,7 +183,6 @@
             }
             form{
               display: inline;
-              margin-left: 30px;
               .td-submit{
                 border-width: 0;
                 font-size: 20px;
@@ -261,7 +272,6 @@
 // ここからshow
 
 .item-new-main{
-  background-color: #f8f8f8;
   padding: 60px 0;
   &__container{
     width: 80%;
