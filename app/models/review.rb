@@ -5,6 +5,6 @@ class Review < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :users, through: :favorites
   
-  validates :title, :content, presence: true
+  validates :title, :content, :user_id, :item_id, presence: true
   mount_uploader :image, ImageUploader
 end
