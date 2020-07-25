@@ -108,6 +108,7 @@
 }
 
 .app-main{
+  width: 100vw;
   margin-top: 50px;
   &__content{
     &__title{
@@ -216,6 +217,7 @@
 }
 
 .app-footer{
+  width: 100vw;
   padding: 90px 0;
   color: #fff;
   background-color: #272727;
