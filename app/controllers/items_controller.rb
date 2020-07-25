@@ -28,8 +28,8 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item.destroy
-    redirect_to "/users/#{item.user_id}"
+    @item.destroy
+    redirect_to "/users/#{@item.user_id}"
   end
 
   private
