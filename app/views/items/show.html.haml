@@ -28,18 +28,18 @@
 
     -if user_signed_in?
       .review-form
-        = form_with model: [@item,@review], local: true, class: 'new-form' do |f|
+        = form_with model: [@item,@review], local: true, class: "new-form", id: "new-review" do |f|
           .new-form__name
             = f.label :title, "レビュータイトル"
-            = f.text_field :title
+            = f.text_field :title, id: 'review-title'
           .new-orm__review
             = f.label :content, "レビュー"
-            = f.text_area :content
+            = f.text_area :content, id: "review-content"
           .new-form__image
             = f.label :image, "画像"
-            = f.file_field :image
+            = f.file_field :image, id: "review-image"
           .new-form__submit
-            = f.submit 'レビューを投稿する', class: "new-form__submit__btn"
+            = f.submit 'レビューを投稿する', class: "new-form__submit__btn", id: "new-submit"
 
     .review-container
       .review-container__box
@@ -53,7 +53,7 @@
               .reviewer
                 = "#{review.user.nickname} : "
               .create-at
-                = review.created_at
+                = review.created_at.to_date
             .review-container__box__content__content
               = review.content
             .review-container__box__content__image
