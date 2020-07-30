@@ -18,7 +18,7 @@ class ItemsController < ApplicationController
 
   def show
     @review = Review.new
-    @reviews = @item.reviews.includes(:user)
+    @reviews = @item.reviews.includes(:user).order("created_at DESC")
   end
 
   def search
