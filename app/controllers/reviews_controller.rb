@@ -2,7 +2,10 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.create(review_params)
-    redirect_to "/items/#{@review.item_id}"
+    respond_to do |format|
+      format.html { redirect_to item_path(params[:item_id])  }
+      format.json
+    end
   end
 
   def destroy
