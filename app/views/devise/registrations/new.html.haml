@@ -1,7 +1,5 @@
-.registrations-header
-  .registrations-header__content
-    .registrations-header__content__title
-      = link_to 'OTORIYOSE', root_path
+= render "header"
+
 .registrations-main
   .registrations-container
     .registrations__title
@@ -31,7 +29,4 @@
         .registrations-container__inputbox__submit
           = f.submit "登録", class: 'registrations-container__inputbox__submit__btn'
 
-.registrations-footer
-  .registrations-footer__content
-    = link_to 'TOP', root_path
-    = link_to 'ログイン', new_user_session_path
+=render "footer"

@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   get 'items/search'
   post 'items/search'
   resources :users
-  resources :items do
-    resources :reviews, only: [:new, :create, :show, :destroy]
+  resources :items, only: [:index, :create, :show, :destroy] do
+    resources :reviews, only: [:new, :create, :destroy]
   end
   
   
