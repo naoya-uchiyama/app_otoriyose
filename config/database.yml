@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: app_otoriyose_production
-  username: app_otoriyose
-  password: <%= ENV['APP_OTORIYOSE_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock

@@ -11,6 +11,9 @@
 ## 制作背景
   昨今のコロナウイルスの影響で、多くの方が外出することを控え巣篭もり消費が増えています。家にいながら観光地や有名店の商品を購入でき、出掛けた気分になれるお取り寄せ商品のニーズが強くなっていると考え作成しました。  また、私自身お取り寄せ商品を頼んでみて失敗してしまったことがあり、どの商品が本当に美味しいのかユーザーの生のレビューを聞きたいという思いもあり今回このアプリを作成しています。
 
+  ![sample3](https://github.com/naoya-uchiyama/app_otoriyose/blob/master/sample3.png)
+
+
 ## 使い方
   ログイン後、検索フォームからお取り寄せしたいキーワードを検索していただくとキーワードにヒットした楽天ストアの商品が表示されます。お気に入り登録をするとレビューを書くことができるようになります。  また、トップページでは他ユーザーがお気に入りにした商品、レビューを見ることができます。
 
@@ -26,8 +29,11 @@
 |password|string|null: false|
 
 ### Association
+
+- has_many :items, dependent: :destroy
 - has_many :reviews, dependent: :destroy
 - has_many :favorites, dependent: :destroy
+- has_many :fav_reviews, through: :favorites, source: :review
 
 
 ## Itemsテーブル
@@ -42,11 +48,9 @@
 |user|references|foreign_key:true|
 
 ### Association
-- has_many :favorites, dependent: :destroy
-- has_many :users, through: :favorites
-- has_many :reviews, dependent: :destroy
-
 - belongs_to :user
+
+- has_many :reviews, dependent: :destroy
 
 
 ## reviewsテーブル
@@ -54,21 +58,25 @@
 |------|----|-------|
 |title|string|null: false|
 |content|text|null: false|
-|user_id|integer|null: false, foreign_key: true|
-|item_id|integer|null: false, foreign_key: true|
+|image|text|null: false|
+|user|references|foreign_key: true|
+|item|references|foreign_key: true|
 
 ### Association
-- belongs_to :item
 - belongs_to :user
+- belongs_to :item
+
+- has_many :favorites, dependent: :destroy
+- has_many :users, through: :favorites
 
 
 ## Favoritesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|item_id|integer|null: false, foreign_key: true|
-|user_id|integer|null: false, foreign_key: true|
+|user|references|null: false, foreign_key: true|
+|review|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
-- belongs_to :item
+- belongs_to :review

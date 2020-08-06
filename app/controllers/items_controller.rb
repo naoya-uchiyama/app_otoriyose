@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :set_item, only: [:show, :destroy]
+  before_action :move_to_index, except: [:index, :show, :search]
+
   def index
     @items = Item.includes(:user).order("created_at DESC").page(params[:page]).per(5)
     @reviews = Review.includes(:user).order("created_at DESC").page(params[:page]).per(5)
@@ -14,9 +17,8 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
     @review = Review.new
-    @reviews = @item.reviews.includes(:user)
+    @reviews = @item.reviews.includes(:user).order("created_at DESC")
   end
 
   def search
@@ -26,14 +28,21 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    item = Item.find(params[:id])
-    item.destroy
-    redirect_to root_path
+    @item.destroy
+    redirect_to "/users/#{@item.user_id}"
   end
 
   private
 
   def item_params
     params.permit(:name, :discription, :price, :imageurl, :itemurl).merge(user_id: current_user.id)
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
+
+  def move_to_index
+    redirect_to action: :index unless user_signed_in?
   end
 end
