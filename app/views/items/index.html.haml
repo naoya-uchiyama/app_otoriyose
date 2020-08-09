@@ -9,7 +9,13 @@
       - else
         = link_to 'ログイン', new_user_session_path, class: "app-header__topbox__logbox__1"
         = link_to '新規登録', new_user_registration_path, class: "app-header__topbox__logbox__2"
-      
+  .app-header__middle
+    %h2 OTORIYOSEとは？
+    %p ◎お取り寄せ商品のレビューサイトです。
+    %p ◎検索機能、ランキングからお取り寄せ商品を検索できます。
+    %P 
+      ◎レビューでは、おいしさ、手軽さ、コストパフォーマンス
+      %br 　の３点でお取り寄せ商品を評価できます。
   .app-header__lowerbox
     .app-header__lowerbox__content
       %h1 キーワードでお取り寄せ
@@ -97,24 +103,24 @@
                 %td{colspan: "2", class: "td-review-content"}
                   = review.content
         - else
-          - @reviews.each do |review|
-            %table
-              %tr
-                %td
-                  = link_to (image_tag review.item.imageurl), review.item.itemurl, target: :_blank
-                %td.td-item-name
-                  = review.item.name
-                  %br
-                  %br
-                  = link_to "商品詳細ページ", item_path(review.item.id)
-                %td.td-item-price
-                  = "¥#{review.item.price}円"
-              %tr
-                %td.td-reviewer
-                  = review.user.nickname
-                %td{colspan: "2", class: "td-review-content"}
-                  = review.content
-        = paginate(@reviews)
+        -#   - @reviews.each do |review|
+        -#     %table
+        -#       %tr
+        -#         %td
+        -#           = link_to (image_tag review.item.imageurl), review.item.itemurl, target: :_blank
+        -#         %td.td-item-name
+        -#           = review.item.name
+        -#           %br
+        -#           %br
+        -#           = link_to "商品詳細ページ", item_path(review.item.id)
+        -#         %td.td-item-price
+        -#           = "¥#{review.item.price}円"
+        -#       %tr
+        -#         %td.td-reviewer
+        -#           = review.user.nickname
+        -#         %td{colspan: "2", class: "td-review-content"}
+        -#           = review.content
+        -# = paginate(@reviews)
 
 
     .app-main__content__title
