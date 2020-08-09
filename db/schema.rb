@@ -71,11 +71,10 @@ ActiveRecord::Schema.define(version: 2020_07_12_061109) do
     t.float "delicious", default: 0.0, null: false
     t.float "eazy", default: 0.0, null: false
     t.float "cost", default: 0.0, null: false
+    t.string "itemcode", null: false
     t.bigint "user_id"
-    t.bigint "item_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_reviews_on_item_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -95,6 +94,5 @@ ActiveRecord::Schema.define(version: 2020_07_12_061109) do
   add_foreign_key "favorites", "reviews"
   add_foreign_key "favorites", "users"
   add_foreign_key "items", "users"
-  add_foreign_key "reviews", "items"
   add_foreign_key "reviews", "users"
 end

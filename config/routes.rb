@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   root to: 'items#index'
   get 'items/search'
   post 'items/search'
+  get 'reviews/list'
+  post 'reviews/list'
   resources :users
-  resources :items, only: [:index, :create, :show, :destroy] do
-    resources :reviews, only: [:new, :create, :destroy]
-  end
+  resources :items, only: [:index, :create, :show, :destroy]
+  resources :reviews, only: [:new, :create, :destroy]
   
   
 end

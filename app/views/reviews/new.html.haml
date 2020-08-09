@@ -1,0 +1,51 @@
+= render 'shared/header'
+
+.review-new-main
+  .review-new-main__container
+    %table.review-new-main__item-box
+      %tr
+        %td{rowspan: "2", class:"review-new-main__item-box__image"}
+          = image_tag @item['mediumImageUrls'][0], class: "review-new-main__item-box__image__content"
+        %td
+          %p 商品名
+        %td
+          %p 価格
+      %tr
+        %td.review-new-main__item-box__name
+          = @item['itemName']
+          %br
+          = link_to "商品購入ページ", @item['itemUrl'], target: :_blank
+          - if user_signed_in?
+            -# - if current_user.id == item.user.id
+              -# = link_to "お気に入り削除", "/items/#{@item.id}", method: :delete
+        %td.item-new-main__item-box__price
+          = "¥#{@item['itemPrice']}円" 
+
+    -if user_signed_in?
+      .review-form
+        = form_with model: @review, local: true, class: "new-form", id: "new-review" do |f|
+          .new-form__name
+            = f.label :title, "レビュータイトル"
+            = f.text_field :title, id: 'review-title'
+          .new-form__star
+            .new-form__star-delicious{id: "star1"}
+              = f.label :delicious, "おいしさ"
+              = f.hidden_field :delicious, id: :review_star1
+            .new-form__star-eazy{id: "star2"}
+              = f.label :eazy, "手軽さ"
+              = f.hidden_field :eazy, id: :review_star2
+            .new-form__star-cost{id: "star3"}
+              = f.label :cost, "コストパフォーマンス"
+              = f.hidden_field :cost, id: :review_star3
+
+          .new-form__review
+            = f.label :content, "レビュー"
+            = f.text_area :content, placeholder:'レビュー内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！', id: "review-content"
+          .new-form__image
+            = f.label :image, "画像"
+            = f.file_field :image, id: "review-image"
+          .new-form__submit
+            = f.hidden_field :itemcode, value: @item['itemCode']
+            = f.submit 'レビューを投稿する', class: "new-form__submit__btn", id: "new-submit"
+
+      = render 'shared/star'
