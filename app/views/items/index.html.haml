@@ -77,50 +77,77 @@
       %h1 レビューから探す
     .app-main__content__review
       .app-main__content__review__box
-        -if user_signed_in?
-          - @reviews.where.not(user_id: current_user.id).each do |review|
-            %table
-              %tr
-                %td
-                  = link_to (image_tag review.item.imageurl), review.item.itemurl, target: :_blank
-                %td.td-item-name
-                  = review.item.name
-                  %br
-                  %br
-                  = link_to "商品詳細ページ", item_path(review.item.id)
+        - @reviews.each do |review|
+          - search_review = RakutenWebService::Ichiba::Item.search(itemCode: review.itemcode).first
+          .review-container__box__content
+            .review-container__box__content__box1
+              .item-image
+                = link_to (image_tag(search_review['mediumImageUrls'][0])), search_review['itemUrl'], target: :_blank
+              .item-title
+                = link_to search_review['itemName'], search_review['itemUrl'], target: :_blank
+              .item-price
+                %p 商品価格
+                = "¥#{search_review['itemPrice']}円"
+              .review-container__box__content__box1--new_review
+                - if user_signed_in?
+                  = form_with url: new_review_path, method: :get, local: true do |f|
+                    = f.hidden_field :itemcode, value: search_review['itemCode']
+                    = f.submit 'レビューを書く', class: "td-submit"
                   = form_with url: items_path, method: :post, local:true do |f|
-                    = f.hidden_field :name, value: review.item.name
-                    = f.hidden_field :discription, value: review.item.discription
-                    = f.hidden_field :price, value: review.item.price
-                    = f.hidden_field :imageurl, value: review.item.imageurl
-                    = f.hidden_field :itemurl, value: review.item.itemurl
+                    = f.hidden_field :itemcode, value: search_review['itemCode']
                     = f.submit 'お気に入り登録', class: 'td-submit'
-                %td.td-item-price
-                  = "¥#{review.item.price}円"
-              %tr
-                %td.td-reviewer
-                  = review.user.nickname
-                %td{colspan: "2", class: "td-review-content"}
-                  = review.content
-        - else
-        -#   - @reviews.each do |review|
-        -#     %table
-        -#       %tr
-        -#         %td
-        -#           = link_to (image_tag review.item.imageurl), review.item.itemurl, target: :_blank
-        -#         %td.td-item-name
-        -#           = review.item.name
-        -#           %br
-        -#           %br
-        -#           = link_to "商品詳細ページ", item_path(review.item.id)
-        -#         %td.td-item-price
-        -#           = "¥#{review.item.price}円"
-        -#       %tr
-        -#         %td.td-reviewer
-        -#           = review.user.nickname
-        -#         %td{colspan: "2", class: "td-review-content"}
-        -#           = review.content
-        -# = paginate(@reviews)
+            .review-container__box__content__box2
+              .review-container__box__content__box2__avater
+                .avater
+                  = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                .reviewer
+                  = "#{review.user.nickname}さん"
+              .review-container__box__content__box2__title
+                %p タイトル
+                = review.title
+              .review-container__box__content__box2__star
+                %p おいしさ
+                %div{id: "star-delicious#{review.id}"}
+                %p 手軽さ
+                %div{id: "star-eazy#{review.id}"}
+                %p コストパフォーマンス
+                %div{id: "star-cost#{review.id}"}
+
+                :javascript
+                  $('#star-delicious#{review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{review.delicious}"
+                  });
+
+                  $('#star-eazy#{review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{review.eazy}"
+                  })
+
+                  $('#star-cost#{review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{review.cost}"
+                  })
+              
+              .review-conteiner__box__content__box2__average
+                = "総合評価 : #{((review.delicious + review.eazy + review.cost) / 3).round(1)}点"
+                
+        = paginate(@reviews)
 
 
     .app-main__content__title
@@ -129,38 +156,35 @@
       .app-main__content__review__box
         -if user_signed_in?
           - @items.where.not(user_id: current_user.id).each do |item|
+            - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
             %table
               %tr
                 %td
-                  = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
+                  = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
                 %td.td-item-name
-                  = item.name
+                  = search_item['itemName']
                   %br
                   %br
                   = link_to "商品詳細ページ", item_path(item.id)
                   = form_with url: items_path, method: :post, local:true do |f|
-                    = f.hidden_field :name, value: item.name
-                    = f.hidden_field :discription, value: item.discription
-                    = f.hidden_field :price, value: item.price
-                    = f.hidden_field :imageurl, value: item.imageurl
-                    = f.hidden_field :itemurl, value: item.itemurl
+                    = f.hidden_field :itemcode, value: search_item['itemCode']
                     = f.submit 'お気に入り登録', class: 'td-submit'
                 %td.td-item-price
-                  = "¥#{item.price}円"
+                  = "¥#{search_item['itemPrice']}円"
         - else
           - @items.each do |item|
+            - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
             %table
               %tr
                 %td
-                  = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
+                  = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
                 %td.td-item-name
-                  = item.name
+                  = search_item['itemName']
                   %br
                   %br
                   = link_to "商品詳細ページ", item_path(item.id)
                 %td.td-item-price
-                  = "¥#{item.price}円"
-
+                  = "¥#{search_item['itemPrice']}円"
       = paginate(@items)
 
 

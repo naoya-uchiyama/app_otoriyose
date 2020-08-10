@@ -16,8 +16,6 @@
           %br
           = link_to "商品購入ページ", @item['itemUrl'], target: :_blank
           - if user_signed_in?
-            -# - if current_user.id == item.user.id
-              -# = link_to "お気に入り削除", "/items/#{@item.id}", method: :delete
         %td.item-new-main__item-box__price
           = "¥#{@item['itemPrice']}円" 
 

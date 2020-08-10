@@ -8,17 +8,12 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.find_or_initialize_by(item_params)
-    if @item.save
-      redirect_to item_path(@item.id)
-    else
-      redirect_to item_search_path
-    end
+    @item = Item.find_or_create_by(item_params)
   end
 
   def show
-    @review = Review.new
-    @reviews = @item.reviews.includes(:user).order("created_at DESC")
+    @search_item = RakutenWebService::Ichiba::Item.search(itemCode: @item.itemcode).first
+    @reviews = Review.includes(:user).where(itemcode: @item.itemcode)
   end
 
   def search
@@ -35,7 +30,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.permit(:name, :discription, :price, :imageurl, :itemurl).merge(user_id: current_user.id)
+    params.permit(:itemcode).merge(user_id: current_user.id)
   end
 
   def set_item
