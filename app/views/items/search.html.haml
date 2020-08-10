@@ -1,4 +1,4 @@
-= render "header"
+= render "shared/header"
 
 .search-view
   - if @items.present? 
@@ -12,12 +12,11 @@
             %br
             %br
             - if user_signed_in?
+              = form_with url: new_review_path, method: :get, local: true do |f|
+                = f.hidden_field :itemcode, value: item['itemCode']
+                = f.submit 'レビューを書く', class: "td-submit"
               = form_with url: items_path, method: :post, local:true do |f|
-                = f.hidden_field :name, value: item['itemName']
-                = f.hidden_field :discription, value: item['itemCaption']
-                = f.hidden_field :price, value: item['itemPrice']
-                = f.hidden_field :imageurl, value: item['mediumImageUrls'][0]
-                = f.hidden_field :itemurl, value: item['itemUrl']
+                = f.hidden_field :itemcode, value: item['itemCode']
                 = f.submit 'お気に入り登録', class: 'td-submit'
           %td.item-box__item-price
             = "￥#{item['itemPrice']}円"

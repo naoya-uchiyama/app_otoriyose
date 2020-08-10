@@ -12,6 +12,17 @@
 
 ActiveRecord::Schema.define(version: 2020_07_12_061109) do
 
+  create_table "average_caches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "rater_id"
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.float "avg", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rateable_type", "rateable_id"], name: "index_average_caches_on_rateable_type_and_rateable_id"
+    t.index ["rater_id"], name: "index_average_caches_on_rater_id"
+  end
+
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "review_id"
     t.bigint "user_id"
@@ -22,26 +33,44 @@ ActiveRecord::Schema.define(version: 2020_07_12_061109) do
   end
 
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "discription", null: false
-    t.integer "price", null: false
-    t.text "imageurl", null: false
-    t.text "itemurl", null: false
+    t.text "itemcode", null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
-  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "content", null: false
-    t.text "image"
-    t.bigint "user_id"
-    t.bigint "item_id"
+  create_table "overall_averages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "rateable_type"
+    t.bigint "rateable_id"
+    t.float "overall_avg", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_reviews_on_item_id"
+    t.index ["rateable_type", "rateable_id"], name: "index_overall_averages_on_rateable_type_and_rateable_id"
+  end
+
+  create_table "rating_caches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "cacheable_type"
+    t.bigint "cacheable_id"
+    t.float "avg", null: false
+    t.integer "qty", null: false
+    t.string "dimension"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cacheable_type", "cacheable_id"], name: "index_rating_caches_on_cacheable_type_and_cacheable_id"
+  end
+
+  create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content"
+    t.text "image"
+    t.float "delicious", default: 0.0, null: false
+    t.float "eazy", default: 0.0, null: false
+    t.float "cost", default: 0.0, null: false
+    t.string "itemcode", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
@@ -61,6 +90,5 @@ ActiveRecord::Schema.define(version: 2020_07_12_061109) do
   add_foreign_key "favorites", "reviews"
   add_foreign_key "favorites", "users"
   add_foreign_key "items", "users"
-  add_foreign_key "reviews", "items"
   add_foreign_key "reviews", "users"
 end
