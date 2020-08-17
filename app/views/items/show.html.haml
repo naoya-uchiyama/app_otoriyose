@@ -1,14 +1,10 @@
 = render "shared/header"
 .item-new-main
   .item-new-main__container
-    %table.item-new-main__item-box
+    %table.table-bordered
       %tr
         %td{rowspan: "2", class:"item-new-main__item-box__image"}
           = image_tag @search_item['mediumImageUrls'][0], class: "item-new-main__item-box__image__content"
-        %td
-          %p 商品名
-        %td
-          %p 価格
       %tr
         %td.item-new-main__item-box__name
           = @search_item['itemName']
@@ -18,7 +14,7 @@
             = link_to "お気に入り削除", "/items/#{@item.id}", method: :delete
         %td.item-new-main__item-box__price
           = "¥#{@search_item['itemPrice']}円" 
-    %table.item-new-main__item-box__discription
+    %table.table-bordered
       %tr
         %td 商品説明
       %tr
@@ -36,7 +32,10 @@
                 = review.created_at.to_date
               .avater-box
                 .avater
-                  = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - if review.user.avatar.blank?
+                    = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - else
+                    = image_tag review.user.avatar.to_s, width: "100px", height: "100px"
                 .reviewer
                   = "#{review.user.nickname}"
               .review-conteiner__box__content__box1__average

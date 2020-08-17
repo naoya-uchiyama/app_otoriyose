@@ -7,11 +7,8 @@
         = f.text_field :keyword, placeholder: "キーワードから探す", class: "form-control"
         = f.submit "検索", class: "btn btn-primary"
   .header__lowerbox
-    .header__lowerbox__link
-      - if user_signed_in?
-        = form_with url: "/users/favorite", method: :get, local: true do |f|
-          = f.hidden_field :id, value: current_user.id
-          = f.submit 'お気に入り一覧', class: "submit"
+    .header__lowerbox__nickname
+      = "NICKNAME : #{@user.nickname}"
     .header__lowerbox__logbox
       - if user_signed_in?
         = link_to "マイページ", user_path(current_user.id),class: "header__lowerbox__logbox__1"
@@ -19,6 +16,3 @@
       - else
         = link_to 'ログイン', new_user_session_path, class: "header__lowerbox__logbox__1"
         = link_to '新規登録', new_user_registration_path, class: "header__lowerbox__logbox__2"
-      
- 
-    

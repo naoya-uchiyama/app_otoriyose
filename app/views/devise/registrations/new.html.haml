@@ -10,7 +10,7 @@
         .registrations-container__inputbox__form
           = f.label :nickname, class: 'registrations-container__inputbox__form__label'
           %br/
-          = f.text_field :nickname, autofocus: true, autocomplete: "nickname", class: 'registrations-container__inputbox__form__field'
+          = f.text_field :nickname, autofocus: true, autocomplete: "image", class: 'registrations-container__inputbox__form__field'
         .registrations-container__inputbox__form
           = f.label :email, class: 'registrations-container__inputbox__form__label'
           %br/
@@ -27,6 +27,6 @@
           %br/
           = f.password_field :password_confirmation, autocomplete: "new-password", class: 'registrations-container__inputbox__form__field'
         .registrations-container__inputbox__submit
-          = f.submit "登録", class: 'registrations-container__inputbox__submit__btn'
+          = f.submit "登録", class: 'btn btn-danger'
 
 =render "footer"

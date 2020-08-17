@@ -1,7 +1,11 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
 @import "reset";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "reviews";
+@import "shared";
 @import "items";
 @import "registrations";
 @import "sessions";
+@import "users";

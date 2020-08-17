@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
   def destroy
     review = Review.find(params[:id])
     review.destroy
-    redirect_to reviews_list_path
+    redirect_back(fallback_location: users_review_path)
   end
 
   def list

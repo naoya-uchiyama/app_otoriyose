@@ -18,6 +18,7 @@
 .registrations-main{
   width: 100wh;
   background-color: whitesmoke;
+  padding-bottom: 60px;
   .registrations-container{
     width: 700px;
     margin: 0 auto;
@@ -33,6 +34,12 @@
       &__form{
         padding-top: 30px;
         text-align: center;
+        #user_avatar{
+          margin: 0 auto;
+        }
+        .btn-primary{
+          width: 80%;
+        }
         &__label{
           font-size: 14px;
         }
@@ -48,13 +55,9 @@
       &__submit{
         padding-top: 30px;
         text-align: center;
-        &__btn{
-          width: 85%;
-          height: 50px;
-          margin: 30px 0 ;
-          background-color: #ea352d;
-          border: 1px solid #ea352d;
-          color: #fff;
+        .btn-danger{
+          width: 80%;
+          margin: 40px 0 ;
           cursor: pointer
         }
       }

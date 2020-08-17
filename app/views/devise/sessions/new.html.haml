@@ -18,20 +18,19 @@
           = f.password_field :password, autocomplete: "current-password", class: 'sessions-container__inputbox__form__field'
 
         .sessions-container__inputbox__submit
-          = f.submit "ログイン", class: 'sessions-container__inputbox__submit__btn'
+          = f.submit "ログイン", class: 'btn btn-danger'
       .sessions-container__login
         .sessions-container__login__no-account
           %p.sessions-container__login__no-account__text アカウントをお持ちでない方はこちら
           .sessions-container__login__no-account__navi
-            = link_to "新規登録", new_user_registration_path 
+            = link_to "新規登録", new_user_registration_path, class: "btn btn-primary"
           
           .sessions-container__login__eazy-login
             = form_with model:@user, url: user_session_path, local: true do |f|
               = f.hidden_field :email, autofocus: true, autocomplete: "email", value: "tester@gmail.com"
               = f.hidden_field :password, autocomplete: "current-password", value: "Testtester1"
               .sessions-container__login__submit
-                = f.submit "かんたんログイン", class: 'sessions-container__inputbox__submit__btn'
+                = f.submit "かんたんログイン", class: 'btn btn-danger'
 
 .sessions-footer
   .sessions-footer__content
-    = link_to 'TOP', root_path

@@ -1,76 +1,24 @@
-.header
-  .header__topbox
-    .header__topbox__title
-      =link_to "OTORIYOSE", root_path
-    .header__topbox__input
-      = form_with url: items_search_path, method: :get, local: true do |f| 
-        = f.text_field :keyword, placeholder: "キーワードから探す", class: "header__topbox__input__word"
-        = f.submit "検索"
-  .header__lowerbox
-    .header__lowerbox__nickname
-      = "NICKNAME : #{@user.nickname}"
-    .header__lowerbox__logbox
-      - if user_signed_in?
-        = link_to "マイページ", user_path(current_user.id),class: "header__lowerbox__logbox__1"
-        = link_to "ログアウト", destroy_user_session_path, method: :delete, class: "header__lowerbox__logbox__2"
-      - else
-        = link_to 'ログイン', new_user_session_path, class: "header__lowerbox__logbox__1"
-        = link_to '新規登録', new_user_registration_path, class: "header__lowerbox__logbox__2"
+= render "header"
+
+.mypage
+  %h2.mypage__header= "マイページ"
+  .mypage__content
+    %h3.title 商品
+    %ul.mypage-lists 
+      %li.mypage-list
+        = form_with url: "/users/favorite", method: :get, local: true do |f|
+          = f.hidden_field :id, value: current_user.id
+          = f.submit 'お気に入り一覧', class: "btn btn-primary btn-lg"
+      %li.mypage-list
+        = form_with url: "/users/review", method: :get, local: true do |f|
+          = f.hidden_field :id, value: current_user.id
+          = f.submit 'レビュー一覧', class: "btn btn-primary btn-lg"
+    %h3.title 設定
+    %ul.mypage-lists 
+      %li.mypage-list
+        = link_to '登録情報変更', edit_user_registration_path, class: 'btn btn-primary btn-lg'
+      
 
 
 
-
-.app-main
-  .app-main__content
-    .app-main__content__title
-      %h1 お気に入り商品一覧
-    .app-main__content__review
-      .app-main__content__review__box
-        - if @items.present?
-          - @items.each do |item|
-            %table
-              %tr
-                %td
-                  = link_to (image_tag item.imageurl), item.itemurl, target: :_blank
-                %td.td-item-name
-                  = item.name
-                  %br
-                  %br
-                  = link_to "商品詳細ページ", item_path(item.id)
-                  = link_to "お気に入り削除", "/items/#{item.id}", method: :delete
-                %td.td-item-price
-                  = "¥#{item.price}円"
-          = paginate(@items)
-        - else
-          .app-main__content__review__box__log
-            %p お気に入り商品がありません
-
-    .app-main__content__title
-      %h1 レビューした商品
-    .app-main__content__review
-      .app-main__content__review__box
-        - if @reviews.present?
-          - @reviews.each do |review|
-            %table
-              %tr
-                %td
-                  = link_to (image_tag review.item.imageurl), review.item.itemurl, target: :_blank
-                %td.td-item-name
-                  = review.item.name
-                  %br
-                  %br
-                  = link_to "商品詳細ページ", item_path(review.item.id)
-                  = link_to "レビュー削除", "/items/#{review.item_id}/reviews/#{review.id}", method: :delete
-                %td.td-item-price
-                  = "¥#{review.item.price}円"
-              %tr
-                %td.td-reviewer
-                  = review.user.nickname
-                %td{colspan: "2", class: "td-review-content"}
-                  = review.content
-          = paginate(@reviews)
-        - else
-          .app-main__content__review__box__log
-            %p レビューの投稿がありません
-        
 

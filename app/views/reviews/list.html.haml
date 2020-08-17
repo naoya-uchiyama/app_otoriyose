@@ -2,20 +2,16 @@
 
 .review-new-main
   .review-new-main__container
-    %table.review-new-main__item-box
+    %table.table-bordered
       %tr
         %td{rowspan: "2", class:"review-new-main__item-box__image"}
           = image_tag @item['mediumImageUrls'][0], class: "review-new-main__item-box__image__content"
-        %td
-          %p 商品名
-        %td
-          %p 価格
       %tr
         %td.review-new-main__item-box__name
           = @item['itemName']
           %br
           = link_to "商品購入ページ", @item['itemUrl'], target: :_blank
-        %td.item-new-main__item-box__price
+        %td.review-new-main__item-box__price
           = "¥#{@item['itemPrice']}円" 
 
     .review-container
@@ -29,7 +25,10 @@
                 = review.created_at.to_date
               .avater-box
                 .avater
-                  = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - if review.user.avatar.blank?
+                    = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - else
+                    = image_tag review.user.avatar.to_s, width: "100px", height: "100px"
                 .reviewer
                   = "#{review.user.nickname}"
               .review-conteiner__box__content__box1__average
@@ -83,10 +82,6 @@
                     score: "#{review.cost}"
                   })
 
-              .review-container__box__destroy
-                - if user_signed_in?
-                  - if current_user.id == review.user.id
-                    = link_to "レビュー削除", "/reviews/#{review.id}", method: :delete
         = paginate(@reviews)
 
 

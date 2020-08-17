@@ -82,6 +82,8 @@ gem 'erb2haml'
 gem 'pry-rails'
 gem 'pry-byebug'
 gem 'jquery-rails'
+gem "jquery-ui-rails"
 gem 'rakuten_web_service'
 gem 'dotenv-rails'
 gem 'kaminari'
+gem 'bootstrap', '~> 4.1.1'

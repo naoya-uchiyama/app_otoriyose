@@ -12,39 +12,39 @@
   .app-header__middle
     %h2 OTORIYOSEとは？
     %p ◎お取り寄せ商品のレビューサイトです。
-    %p ◎検索機能、ランキングからお取り寄せ商品を検索できます。
+    %p ◎検索機能、レビューからお取り寄せ商品を検索できます。
     %P 
       ◎レビューでは、おいしさ、手軽さ、コストパフォーマンス
       %br 　の３点でお取り寄せ商品を評価できます。
   .app-header__lowerbox
     .app-header__lowerbox__content
-      %h1 キーワードでお取り寄せ
+      %h3 キーワードでお取り寄せ
     .app-header__lowerbox__input
       = form_with url: items_search_path, method: :get, local: true do |f| 
-        = f.text_field :keyword, placeholder: "キーワードから探す", class: "app-header__lowerbox__input__word"
-        = f.submit "検索"
+        = f.text_field :keyword, placeholder: "キーワードから探す", class: "form-control"
+        = f.submit "検索", class: "btn btn-primary"
 .app-main
   .app-main__content
     .app-main__content__title
       %h1 エリアから探す
     .app-main__content__area
       .app-main__content__area__box
-        = image_tag 'top_img_tokyo.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_tokyo.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "東京 お取り寄せ"
           = f.submit '東京のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_osaka.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_osaka.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "大阪 お取り寄せ"
           = f.submit '大阪のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_hokkaido.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_hokkaido.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "北海道 お取り寄せ"
           = f.submit '北海道のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_okinawa.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_okinawa.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "沖縄 お取り寄せ"
           = f.submit '沖縄のお取り寄せで検索', class: "app-main__content__area__box__submit"
@@ -53,22 +53,22 @@
       %h1 食材から探す
     .app-main__content__area
       .app-main__content__area__box
-        = image_tag 'top_img_meet.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_meet.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "肉 お取り寄せ"
           = f.submit '肉のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_susi.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_susi.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "寿司 お取り寄せ"
           = f.submit '寿司のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_kaisen.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_kaisen.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "海鮮 お取り寄せ"
           = f.submit '海鮮のお取り寄せで検索', class: "app-main__content__area__box__submit"
       .app-main__content__area__box
-        = image_tag 'top_img_cake.jpg', width: '100px', height: '100px'
+        = image_tag 'top_img_cake.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "スイーツ お取り寄せ"
           = f.submit 'スイーツのお取り寄せで検索', class: "app-main__content__area__box__submit"
@@ -92,14 +92,18 @@
                 - if user_signed_in?
                   = form_with url: new_review_path, method: :get, local: true do |f|
                     = f.hidden_field :itemcode, value: search_review['itemCode']
-                    = f.submit 'レビューを書く', class: "td-submit"
-                  = form_with url: items_path, method: :post, local:true do |f|
-                    = f.hidden_field :itemcode, value: search_review['itemCode']
-                    = f.submit 'お気に入り登録', class: 'td-submit'
+                    = f.submit 'レビューを書く', class: "btn btn-primary btn-lg"
+                  - if @saveditems.where(user_id: current_user.id, itemcode: search_review['itemCode']).blank?
+                    = form_with url: items_path, method: :post, local:true do |f|
+                      = f.hidden_field :itemcode, value: search_review['itemCode']
+                      = f.submit 'お気に入り登録', class: 'btn btn-primary btn-lg'
             .review-container__box__content__box2
               .review-container__box__content__box2__avater
                 .avater
-                  = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - if review.user.avatar.blank?
+                    = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - else
+                    = image_tag review.user.avatar.to_s, width: "100px", height: "100px"
                 .reviewer
                   = "#{review.user.nickname}さん"
               .review-container__box__content__box2__title
@@ -147,7 +151,7 @@
               .review-conteiner__box__content__box2__average
                 = "総合評価 : #{((review.delicious + review.eazy + review.cost) / 3).round(1)}点"
                 
-        = paginate(@reviews)
+      = paginate(@reviews)
 
 
     .app-main__content__title
@@ -157,7 +161,7 @@
         -if user_signed_in?
           - @items.where.not(user_id: current_user.id).each do |item|
             - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
-            %table
+            %table.table-hover
               %tr
                 %td
                   = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
@@ -165,16 +169,17 @@
                   = search_item['itemName']
                   %br
                   %br
-                  = link_to "商品詳細ページ", item_path(item.id)
-                  = form_with url: items_path, method: :post, local:true do |f|
-                    = f.hidden_field :itemcode, value: search_item['itemCode']
-                    = f.submit 'お気に入り登録', class: 'td-submit'
+                  = link_to "商品詳細ページ", item_path(item.id), class: "btn btn-primary btn-lg"
+                  - if @saveditems.where(user_id: current_user.id, itemcode: search_item['itemCode']).blank?
+                    = form_with url: items_path, method: :post, local:true do |f|
+                      = f.hidden_field :itemcode, value: search_item['itemCode']
+                      = f.submit 'お気に入り登録', class: 'btn btn-primary btn-lg'
                 %td.td-item-price
                   = "¥#{search_item['itemPrice']}円"
         - else
           - @items.each do |item|
             - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
-            %table
+            %table.table-hover
               %tr
                 %td
                   = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
@@ -182,7 +187,7 @@
                   = search_item['itemName']
                   %br
                   %br
-                  = link_to "商品詳細ページ", item_path(item.id)
+                  = link_to "商品詳細ページ", item_path(item.id), class: "btn btn-primary btn-lg"
                 %td.td-item-price
                   = "¥#{search_item['itemPrice']}円"
       = paginate(@items)
