@@ -85,11 +85,13 @@
             display: flex;
             align-items: center;
             margin: 15px;
-            width: 150px;
+            .btn-primary{
+              width: 250px;
+            }
           }
           .btn-danger{
             margin: 15px;
-            width: 150px;
+            width: 250px;
           }
           
         }
