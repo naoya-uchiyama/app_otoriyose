@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post 'items/search'
   get 'reviews/list'
   post 'reviews/list'
+  get 'users/favorite'
+  get 'users/review'
   resources :users
   resources :items, only: [:index, :create, :show, :destroy]
   resources :reviews, only: [:new, :create, :destroy]

@@ -4,7 +4,7 @@
   - if @items.present? 
     - @items.each do |item|
       .item-box
-        %table
+        %table.table-bordered
           %td.item-box__item-image
             = link_to (image_tag(item['mediumImageUrls'][0])), item['itemUrl'], target: :_blank
           %td.item-box__item-name
@@ -14,10 +14,12 @@
             - if user_signed_in?
               = form_with url: new_review_path, method: :get, local: true do |f|
                 = f.hidden_field :itemcode, value: item['itemCode']
-                = f.submit 'レビューを書く', class: "td-submit"
-              = form_with url: items_path, method: :post, local:true do |f|
-                = f.hidden_field :itemcode, value: item['itemCode']
-                = f.submit 'お気に入り登録', class: 'td-submit'
+                = f.submit 'レビューを書く', class: "btn btn-primary btn-lg"
+              - if @saveditems.where(user_id: current_user.id, itemcode: item['itemCode']).blank?
+                = form_with url: items_path, method: :post, local:true do |f|
+                  = f.hidden_field :itemcode, value: item['itemCode']
+                  = f.submit 'お気に入り登録', class: 'btn btn-primary btn-lg'
+
           %td.item-box__item-price
             = "￥#{item['itemPrice']}円"
   - else

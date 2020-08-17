@@ -3,12 +3,14 @@ class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show, :search]
 
   def index
+    @saveditems = Item.all
     @items = Item.includes(:user).order("created_at DESC").page(params[:page]).per(5)
     @reviews = Review.includes(:user).order("created_at DESC").page(params[:page]).per(5)
   end
 
   def create
     @item = Item.find_or_create_by(item_params)
+    redirect_back(fallback_location: items_search_path)
   end
 
   def show
@@ -20,11 +22,12 @@ class ItemsController < ApplicationController
     if params[:keyword].present?
       @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword], genreId: 100227 )
     end
+    @saveditems = Item.all
   end
 
   def destroy
-    @item.destroy
-    redirect_to "/users/#{@item.user_id}"
+    @item.delete
+    redirect_back(fallback_location: users_favorite_path)
   end
 
   private

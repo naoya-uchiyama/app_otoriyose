@@ -1,0 +1,25 @@
+= render "header"
+
+.search-view
+  .search-view__title
+    %h1 お気に入り一覧
+  - if @items.present? 
+    - @items.each do |item|
+      - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
+      .item-box
+        %table.table-hover
+          %td.item-box__item-image
+            = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
+          %td.item-box__item-name
+            = link_to search_item['itemName'], search_item['itemUrl'], target: :_blank
+            %br
+            %br
+            - if user_signed_in?
+              = form_with url: new_review_path, method: :get, local: true do |f|
+                = f.hidden_field :itemcode, value: search_item['itemCode']
+                = f.submit 'レビューを書く', class: "btn btn-primary btn-lg"
+              = link_to "お気に入り削除", "/items/#{item.id}", method: :delete, class: "btn btn-danger btn-lg"
+          %td.item-box__item-price
+            = "￥#{search_item['itemPrice']}円"
+  - else
+    %p お気に入り商品がありません

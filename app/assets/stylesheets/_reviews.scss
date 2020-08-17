@@ -25,17 +25,18 @@
         border-bottom: solid 3px #5e7fca;
       }
       td{
-        
-        border: 1px solid #494d49;
+        border: 1px solid #ddd;
         text-align: center;
       }
       &__image{
       }
       &__name{
-
+        text-align: center;
       }
       &__price{
         width: 100px;
+        text-align: center;
+        font-size: 20px;
         
       }
       &__discription{
@@ -61,7 +62,7 @@
         }
         #review-title{
           height: 30px;
-          width: 90%;
+          width: 50%;
           margin-bottom: 30px;
           padding: 20px;
           font-size: 30px;
@@ -71,27 +72,26 @@
         }
         #review-content{
           height: 200px;
-          width: 90%;
+          width: 50%;
           padding: 30px;
           font-size: 25px;
         }
-        #review-image{
-          margin-bottom: 50px;
-          width: 420px;
-        }
+
         &__submit{
-          &__btn{
-            display: inline-block;
-            text-decoration: none;
-            color: #FFF;
-            width: 600px;
-            height: 70px;
-            border-radius: 15px;
-            text-align: center;
-            overflow: hidden;
-            background-image: linear-gradient(45deg, #709dff 0%, #91fdb7 100%);
-            cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          label{
+            display: flex;
+            align-items: center;
+            margin: 15px;
+            width: 150px;
           }
+          .btn-danger{
+            margin: 15px;
+            width: 150px;
+          }
+          
         }
       }
     }
@@ -107,8 +107,8 @@
           display: flex;
           text-align: center;
           margin: 30px 0;
-          border: 1px solid;
-          border-color: rgb(73, 77, 73);
+          padding: 15px;
+          border: 1px solid #ddd;
           border-radius: 8px;
           &__box1{
             width: 40vw;
