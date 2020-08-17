@@ -86,4 +86,4 @@ gem "jquery-ui-rails"
 gem 'rakuten_web_service'
 gem 'dotenv-rails'
 gem 'kaminari'
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap', '~> 4.3.1'
