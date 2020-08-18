@@ -90,13 +90,15 @@
                 = "¥#{search_review['itemPrice']}円"
               .review-container__box__content__box1--new_review
                 - if user_signed_in?
-                  = form_with url: new_review_path, method: :get, local: true do |f|
-                    = f.hidden_field :itemcode, value: search_review['itemCode']
-                    = f.submit 'レビューを書く', class: "btn btn-primary btn-lg"
+                  = link_to 'レビュー詳細', review_path(review.id), class: "btn btn-primary btn-lg"
                   - if @saveditems.where(user_id: current_user.id, itemcode: search_review['itemCode']).blank?
                     = form_with url: items_path, method: :post, local:true do |f|
                       = f.hidden_field :itemcode, value: search_review['itemCode']
                       = f.submit 'お気に入り登録', class: 'btn btn-primary btn-lg'
+                  - else
+                    = form_with url: new_review_path, method: :get, local: true do |f|
+                      = f.hidden_field :itemcode, value: search_review['itemCode']
+                      = f.submit 'レビューを書く', class: "btn btn-primary btn-lg"
             .review-container__box__content__box2
               .review-container__box__content__box2__avater
                 .avater

@@ -17,6 +17,11 @@ class ReviewsController < ApplicationController
     # end
   end
 
+  def show
+    @review = Review.find(params[:id])
+    @item = RakutenWebService::Ichiba::Item.search(itemCode: @review.itemcode).first
+  end
+
   def destroy
     review = Review.find(params[:id])
     review.destroy

@@ -18,6 +18,7 @@
               = "¥#{search_review['itemPrice']}円"
             .review-container__box__content__box1--new_review
               .review-container__box__destroy
+                = link_to "レビュー詳細", review_path(review.id), class: "btn btn-primary"
                 - if user_signed_in? && current_user.id == review.user.id
                   = link_to "レビュー削除", "/reviews/#{review.id}", method: :delete, class: "btn btn-danger"
           .review-container__box__content__box2

@@ -1,0 +1,88 @@
+= render 'shared/header'
+
+.review-new-main
+  .review-new-main__container
+    %table.table-bordered
+      %tr
+        %td{rowspan: "2", class:"review-new-main__item-box__image"}
+          = image_tag @item['mediumImageUrls'][0], class: "review-new-main__item-box__image__content"
+      %tr
+        %td.review-new-main__item-box__name
+          = @item['itemName']
+          %br
+          = link_to "商品購入ページ", @item['itemUrl'], target: :_blank
+        %td.review-new-main__item-box__price
+          = "¥#{@item['itemPrice']}円" 
+
+    .review-container
+      .review-container__box
+        .review-container__box__title
+          %p レビュー
+        .review-container__box__content
+          .review-container__box__content__container
+            .review-container__box__content__container__box1
+              .create-at
+                = @review.created_at.to_date
+              .avater-box
+                .avater
+                  - if @review.user.avatar.blank?
+                    = image_tag "member_photo_noimage_thumb.png", width: "100px", height: "100px"
+                  - else
+                    = image_tag @review.user.avatar.to_s, width: "100px", height: "100px"
+                .reviewer
+                  = "#{@review.user.nickname}"
+              .review-conteiner__box__content__container__box1__average
+                = "総合評価 : #{((@review.delicious + @review.eazy + @review.cost) / 3).round(1)}点"
+              .review-container__box__content__container__box1__title
+                %p タイトル
+                = @review.title
+              
+            .review-container__box__content__container__box2
+              .review-container__box__content__container__box2__star
+                %p おいしさ
+                %div{id: "star-delicious#{@review.id}"}
+                %p 手軽さ
+                %div{id: "star-eazy#{@review.id}"}
+                %p コストパフォーマンス
+                %div{id: "star-cost#{@review.id}"}
+
+                :javascript
+                  $('#star-delicious#{@review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{@review.delicious}"
+                  });
+
+                  $('#star-eazy#{@review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{@review.eazy}"
+                  })
+
+                  $('#star-cost#{@review.id}').raty({
+                    size: 36,
+                    starOff: "#{asset_path('star-off.png')}",
+                    starOn: "#{asset_path('star-on.png')}",
+                    starHalf: "#{asset_path('star-half.png')}",
+                    half: true,
+                    readOnly: true,
+                    score: "#{@review.cost}"
+                  })
+
+          .review-container__box__content__container2
+            - if @review.content.present?
+              .review-container__box__content__container2__title
+                %p レビュー
+                = @review.content
+            .review-container__box__content__container2__image
+              = image_tag "#{@review.image}"
+
+      = render 'shared/star'

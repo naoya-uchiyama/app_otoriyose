@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'users/review'
   resources :users
   resources :items, only: [:index, :create, :show, :destroy]
-  resources :reviews, only: [:new, :create, :destroy]
+  resources :reviews, only: [:new, :create, :show, :destroy]
   
   
 end
