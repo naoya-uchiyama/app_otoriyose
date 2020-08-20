@@ -209,12 +209,6 @@
             font-size: 20px;
             vertical-align: middle;
           }
-          .td-reviewer{
-            padding: 20px;
-          }
-          .td-review-content{
-            padding: 20px;
-          }
         }
         .review-container__box__content2{
           padding: 50px 0 150px;
@@ -298,12 +292,12 @@
   width: 70%;
   margin: 0 auto;
   &__container{
+    table{
+      width: 100%;
+    }
     .item-new-main__item-box{
       margin-bottom: 40px;
       font-size: 18px;
-      table{
-        width: 100%;
-      }
       td{
         border: 1px solid #ddd;
         text-align: center;

@@ -4,9 +4,8 @@
   .review-new-main__container
     %table.table-bordered
       %tr
-        %td{rowspan: "2", class:"review-new-main__item-box__image"}
+        %td.review-new-main__item-box__image
           = image_tag @item['mediumImageUrls'][0], class: "review-new-main__item-box__image__content"
-      %tr
         %td.review-new-main__item-box__name
           = @item['itemName']
           %br

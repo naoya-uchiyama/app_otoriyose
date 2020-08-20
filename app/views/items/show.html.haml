@@ -3,9 +3,8 @@
   .item-new-main__container
     %table.table-bordered
       %tr
-        %td{rowspan: "2", class:"item-new-main__item-box__image"}
+        %td.item-new-main__item-box__image
           = image_tag @search_item['mediumImageUrls'][0], class: "item-new-main__item-box__image__content"
-      %tr
         %td.item-new-main__item-box__name
           = @search_item['itemName']
           %br
