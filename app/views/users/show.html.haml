@@ -2,22 +2,24 @@
 
 .mypage
   %h2.mypage__header= "マイページ"
-  .mypage__content
-    %h3.title 商品
-    %ul.mypage-lists 
-      %li.mypage-list
-        = form_with url: "/users/favorite", method: :get, local: true do |f|
-          = f.hidden_field :id, value: current_user.id
-          = f.submit 'お気に入り一覧', class: "btn btn-primary btn-lg"
-      %li.mypage-list
-        = form_with url: "/users/review", method: :get, local: true do |f|
-          = f.hidden_field :id, value: current_user.id
-          = f.submit 'レビュー一覧', class: "btn btn-primary btn-lg"
-    %h3.title 設定
-    %ul.mypage-lists 
-      %li.mypage-list
-        = link_to '登録情報変更', edit_user_registration_path, class: 'btn btn-primary btn-lg'
-      
+  .mypage__container
+    .mypage__container__content1
+      %h3.title 商品
+      %ul.mypage-lists 
+        %li.mypage-list
+          = form_with url: "/users/favorite", method: :get, local: true do |f|
+            = f.hidden_field :id, value: current_user.id
+            = f.submit 'お気に入り一覧', class: "btn btn-primary btn-lg"
+        %li.mypage-list
+          = form_with url: "/users/review", method: :get, local: true do |f|
+            = f.hidden_field :id, value: current_user.id
+            = f.submit 'レビュー一覧', class: "btn btn-primary btn-lg"
+    .mypage__container__content2
+      %h3.title 設定
+      %ul.mypage-lists 
+        %li.mypage-list
+          = link_to '登録情報変更', edit_user_registration_path, class: 'btn btn-primary btn-lg'
+        
 
 
 

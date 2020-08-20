@@ -28,50 +28,50 @@
     .app-main__content__title
       %h1 エリアから探す
     .app-main__content__area
-      .app-main__content__area__box
+      %label.app-main__content__area__box
         = image_tag 'top_img_tokyo.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "東京 お取り寄せ"
-          = f.submit '東京のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.submit '東京', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_osaka.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "大阪 お取り寄せ"
-          = f.submit '大阪のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.submit '大阪', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_hokkaido.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "北海道 お取り寄せ"
-          = f.submit '北海道のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.submit '北海道', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_okinawa.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "沖縄 お取り寄せ"
-          = f.submit '沖縄のお取り寄せで検索', class: "app-main__content__area__box__submit"
+          = f.submit '沖縄', class: "app-main__content__area__box__submit"
 
     .app-main__content__title
       %h1 食材から探す
     .app-main__content__area
-      .app-main__content__area__box
+      %label.app-main__content__area__box
         = image_tag 'top_img_meet.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
-          = f.hidden_field :keyword, value: "肉 お取り寄せ"
-          = f.submit '肉のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.hidden_field :keyword, value: "牛肉 お取り寄せ"
+          = f.submit '牛肉', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_susi.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "寿司 お取り寄せ"
-          = f.submit '寿司のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.submit '寿司', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_kaisen.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "海鮮 お取り寄せ"
-          = f.submit '海鮮のお取り寄せで検索', class: "app-main__content__area__box__submit"
-      .app-main__content__area__box
+          = f.submit '海鮮', class: "app-main__content__area__box__submit"
+      %label.app-main__content__area__box
         = image_tag 'top_img_cake.jpg', width: '125px', height: '125px', class: "img-thumbnail"
         = form_with url: items_search_path, method: :get, local: true do |f|
           = f.hidden_field :keyword, value: "スイーツ お取り寄せ"
-          = f.submit 'スイーツのお取り寄せで検索', class: "app-main__content__area__box__submit"
+          = f.submit 'スイーツ', class: "app-main__content__area__box__submit"
 
     .app-main__content__title
       %h1 レビューから探す
@@ -89,8 +89,8 @@
                 %p 商品価格
                 = "¥#{search_review['itemPrice']}円"
               .review-container__box__content__box1--new_review
+                = link_to 'レビュー詳細', review_path(review.id), class: "btn btn-primary btn-lg"
                 - if user_signed_in?
-                  = link_to 'レビュー詳細', review_path(review.id), class: "btn btn-primary btn-lg"
                   - if @saveditems.where(user_id: current_user.id, itemcode: search_review['itemCode']).blank?
                     = form_with url: items_path, method: :post, local:true do |f|
                       = f.hidden_field :itemcode, value: search_review['itemCode']

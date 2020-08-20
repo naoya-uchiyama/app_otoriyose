@@ -4,7 +4,7 @@
   .review-new-main__container
     %table.table-bordered
       %tr
-        %td
+        %td.review-new-main__item-box__image
           = image_tag @item['mediumImageUrls'][0], class: "review-new-main__item-box__image__content"
         %td.review-new-main__item-box__name
           = @item['itemName']
@@ -35,10 +35,10 @@
             = f.text_area :content, placeholder:'レビュー内容がなくても、タイトルと評価のみで投稿できます。まずは投稿してみましょう！', id: "review-content" 
           .new-form__submit
             %label.new-form__image
-              .btn.btn-primary
+              .btn.btn-primary.btn-lg
                 レビュー画像選択
                 = f.file_field :image, id: "review-image", class: "file", style: "display: none;"
             = f.hidden_field :itemcode, value: @item['itemCode']
-            = f.submit 'レビューを投稿', class: "btn btn-danger", id: "new-submit"
+            = f.submit 'レビューを投稿', class: "btn btn-danger btn-lg", id: "new-submit"
 
       = render 'shared/star'

@@ -1,39 +1,47 @@
 // users/show
 
 .mypage{
+  width: 70%;
+  margin: 30px auto;
   &__header{
-    margin: 50px;
     font-size: 40px;
+    margin: 10px 0;
   }
-  &__content{
+  &__container{
+    display: flex;
+    justify-content: center;
+    &__content1{
+      width: 50%;
+    }
+    &__content2{
+      width: 50%;
+    }
     .title{
+      display: inline-flex;
       font-size: 40px;
-      margin: 50px;
+      margin: 20px 0;
       position: relative;
     }
     .title::after{
       content: "";
-      width: 500px;
+      width: 150px;
       height: 4px;
       background-color: #3CCACE;
       position: absolute;
       bottom: 0;
-      left: 16%;
-      transform: translateX(-50%);
     }
     .mypage-lists{
-      display: flex;
-      justify-content: center;
       font-size: 40px;
-      margin: 60px;
+      margin: 20px auto;
       .mypage-list{
-        margin: 20px;
+        margin: 20px 0;
         .btn{
-          width: 400px;
-          font-size: 40px;
+          width: 80%;
+          font-size: 2rem;
         }
       }
     }
   }
+
 }
 
