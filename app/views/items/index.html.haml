@@ -165,7 +165,7 @@
             - search_item = RakutenWebService::Ichiba::Item.search(itemCode: item.itemcode).first
             %table.table-hover
               %tr
-                %td
+                %td.td-item-image
                   = link_to (image_tag(search_item['mediumImageUrls'][0])), search_item['itemUrl'], target: :_blank
                 %td.td-item-name
                   = search_item['itemName']
