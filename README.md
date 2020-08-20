@@ -15,7 +15,7 @@
 
 
 ## 使い方
-  ログイン後、検索フォームからお取り寄せしたいキーワードを検索していただくとキーワードにヒットした楽天ストアの商品が表示されます。お気に入り登録をするとレビューを書くことができるようになります。  また、トップページでは他ユーザーがお気に入りにした商品、レビューを見ることができます。
+  検索フォームからお取り寄せしたいキーワードを検索していただくとキーワードにヒットした楽天ストアの商品が表示されます。ログイン後、お気に入り登録とレビューを書くことができるようになります。また、トップページでは他ユーザーがお気に入りにした商品、レビューを見ることができます。
 
 
 # DB設計
@@ -25,6 +25,7 @@
 |Column|Type|Options|
 |------|----|-------|
 |nickname|string|null: false , unique: true|
+|avatar|string|
 |email|string|null: false , unique: true|
 |password|string|null: false|
 
@@ -40,11 +41,7 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|name|string|null: false|
-|discription|text|null: false|
-|price|integer|null: false|
-|imageurl|text|null: false|
-|itemurl|text|null: false|
+|itemcode|text|null: false|
 |user|references|foreign_key:true|
 
 ### Association
@@ -57,14 +54,17 @@
 |Column|Type|Options|
 |------|----|-------|
 |title|string|null: false|
-|content|text|null: false|
-|image|text|null: false|
+|content|text|
+|image|text|
+|delicious|float|null: false|
+|eazy|float|null: false|
+|cost|float|null: false|
+|itemcode|string|null: false|
 |user|references|foreign_key: true|
 |item|references|foreign_key: true|
 
 ### Association
 - belongs_to :user
-- belongs_to :item
 
 - has_many :favorites, dependent: :destroy
 - has_many :users, through: :favorites
