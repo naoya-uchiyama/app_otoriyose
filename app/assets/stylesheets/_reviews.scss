@@ -167,7 +167,7 @@
             display: flex;
             justify-content: center;
             &__title{
-              width: 50wh;
+              width: 50%;
               margin: 15px;
               font-size: 25px;
               p {
@@ -175,7 +175,7 @@
               }
             }
             &__image{
-              width: 50wh;
+              width: 50%;
               margin: 15px;
             }
           }
