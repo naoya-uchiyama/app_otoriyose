@@ -46,35 +46,37 @@
                 %div{id: "star-cost#{@review.id}"}
 
                 :javascript
-                  $('#star-delicious#{@review.id}').raty({
-                    size: 36,
-                    starOff: "#{asset_path('star-off.png')}",
-                    starOn: "#{asset_path('star-on.png')}",
-                    starHalf: "#{asset_path('star-half.png')}",
-                    half: true,
-                    readOnly: true,
-                    score: "#{@review.delicious}"
+                  $(document).on('turbolinks:load', function(){
+                    $('#star-delicious#{@review.id}').raty({
+                      size: 36,
+                      starOff: "#{asset_path('star-off.png')}",
+                      starOn: "#{asset_path('star-on.png')}",
+                      starHalf: "#{asset_path('star-half.png')}",
+                      half: true,
+                      readOnly: true,
+                      score: "#{@review.delicious}"
+                    });
+
+                    $('#star-eazy#{@review.id}').raty({
+                      size: 36,
+                      starOff: "#{asset_path('star-off.png')}",
+                      starOn: "#{asset_path('star-on.png')}",
+                      starHalf: "#{asset_path('star-half.png')}",
+                      half: true,
+                      readOnly: true,
+                      score: "#{@review.eazy}"
+                    });
+
+                    $('#star-cost#{@review.id}').raty({
+                      size: 36,
+                      starOff: "#{asset_path('star-off.png')}",
+                      starOn: "#{asset_path('star-on.png')}",
+                      starHalf: "#{asset_path('star-half.png')}",
+                      half: true,
+                      readOnly: true,
+                      score: "#{@review.cost}"
+                    });
                   });
-
-                  $('#star-eazy#{@review.id}').raty({
-                    size: 36,
-                    starOff: "#{asset_path('star-off.png')}",
-                    starOn: "#{asset_path('star-on.png')}",
-                    starHalf: "#{asset_path('star-half.png')}",
-                    half: true,
-                    readOnly: true,
-                    score: "#{@review.eazy}"
-                  })
-
-                  $('#star-cost#{@review.id}').raty({
-                    size: 36,
-                    starOff: "#{asset_path('star-off.png')}",
-                    starOn: "#{asset_path('star-on.png')}",
-                    starHalf: "#{asset_path('star-half.png')}",
-                    half: true,
-                    readOnly: true,
-                    score: "#{@review.cost}"
-                  })
 
           .review-container__box__content__container2
             - if @review.content.present?
